@@ -4,6 +4,7 @@ export default function manageUsers(state={
 }, action) {
   switch (action.type) {
     case 'LOGIN':
+      console.log('LOGIN', action.user)
       return {
         currentUser: action.user
       }

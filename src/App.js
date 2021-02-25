@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 import NavBar from './components/navBar'
 import {logout} from './actions/users'
 import Signup from './components/signup'
+import {login} from './actions/users'
 
 class App extends Component {
   state = {
@@ -57,12 +58,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: (user) => {
-      dispatch(logout(user))
-    }
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     logout: (user) => {
+//       dispatch(logout(user))
+//     },
+//     login: (user) => {
+//       dispatch(login(user))
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, {logout, login})(App)
