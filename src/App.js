@@ -5,6 +5,8 @@ import Login from './components/login'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Profile from './components/profile'
 import {connect} from 'react-redux'
+import NavBar from './components/navBar'
+import {logout} from './actions/users'
 
 class App extends Component {
   state = {
@@ -20,10 +22,15 @@ class App extends Component {
     })
   }
 
+  logout = () => {
+    
+  }
+
   render() {
     console.log(this)
     return (
       <div className="App">
+        <NavBar currentUser={this.props.currentUser} logout={this.props.logout}/>
         <Router>
           <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
           <Route exact path='/profile' render={()=> {
@@ -47,5 +54,12 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: (user) => {
+      dispatch(logout(user))
+    }
+  }
+}
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
