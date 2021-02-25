@@ -4,6 +4,7 @@ import './App.css';
 import Login from './components/login'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Profile from './components/profile'
+import {connect} from 'react-redux'
 
 class App extends Component {
   state = {
@@ -20,14 +21,14 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this)
     return (
       <div className="App">
         <Router>
           <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
           <Route exact path='/profile' render={()=> {
-            return this.state.currentUser ? (
-              <Profile currentUser={this.state.currentUser} currentProfile={this.state.currentProfile}/>
+            return this.props.currentUser ? (
+              <Profile />
             ) : (
               <Login setCurrentUser={this.setCurrentUser} />
             )
@@ -40,4 +41,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.users.currentUser
+  }
+}
+
+
+export default connect(mapStateToProps)(App)

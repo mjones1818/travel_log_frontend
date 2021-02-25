@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {connect} from 'react-redux'
 
 class Profile extends Component {
   
@@ -7,10 +8,16 @@ class Profile extends Component {
     return(
       <div>
         <h1>Profile: {this.props.currentUser.name}</h1>
-        <img src={`http://localhost:3000/${this.props.currentProfile}`}/>
+        <img src={`http://localhost:3000/${this.props.currentUser.profile_url}`}/>
       </div>
     )
   }
 }
 
-export default Profile
+const mapStateToProps = (state) => {
+  return { 
+    currentUser: state.users.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(Profile)
