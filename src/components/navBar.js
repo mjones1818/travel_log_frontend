@@ -13,6 +13,7 @@ class NavBar extends Component {
           ) : (
             <Fragment>
               <li><Link to='/login'>login</Link></li>
+              <li><Link to='/signup'>Signup</Link></li>
             </Fragment>
           )}
         </ul>

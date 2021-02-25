@@ -7,6 +7,7 @@ import Profile from './components/profile'
 import {connect} from 'react-redux'
 import NavBar from './components/navBar'
 import {logout} from './actions/users'
+import Signup from './components/signup'
 
 class App extends Component {
   state = {
@@ -30,8 +31,9 @@ class App extends Component {
     console.log(this)
     return (
       <div className="App">
-        <NavBar currentUser={this.props.currentUser} logout={this.props.logout}/>
         <Router>
+          <NavBar currentUser={this.props.currentUser} logout={this.props.logout}/>
+        
           <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
           <Route exact path='/profile' render={()=> {
             return this.props.currentUser ? (
@@ -40,6 +42,7 @@ class App extends Component {
               <Login setCurrentUser={this.setCurrentUser} />
             )
           }} />
+          <Route exact path='/signup' render={()=> <Signup />}/>
           
         </Router>
         

@@ -10,6 +10,7 @@ import manageTrips from './reducers/manageTrips';
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {Redirect} from 'react-router-dom'
 
 const rootReducer = combineReducers({
   users: manageUsers,
@@ -22,13 +23,10 @@ const store = createStore(rootReducer, compose(
 )
 
 ReactDOM.render(
-  <Router>
+
       <Provider store={store}>
         <App />
       </Provider>
-  </Router>
-
-    
   ,
   document.getElementById('root')
 );
