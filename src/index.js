@@ -3,11 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
+import { Provider} from 'react-redux'
+import manageUsers from './reducers/manageUsers'
+import manageTrips from './reducers/manageTrips';
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+
+const rootReducer = combineReducers({
+  users: manageUsers,
+  trips: manageTrips
+})
+
+const store = createStore(rootReducer, compose(
+  applyMiddleware(thunk, logger),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+)
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>
+    
+  ,
   document.getElementById('root')
 );
 
