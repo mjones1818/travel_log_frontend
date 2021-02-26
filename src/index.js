@@ -9,6 +9,8 @@ import manageUsers from './reducers/manageUsers'
 import manageTrips from './reducers/manageTrips';
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {Redirect} from 'react-router-dom'
 
 const rootReducer = combineReducers({
   users: manageUsers,
@@ -21,10 +23,10 @@ const store = createStore(rootReducer, compose(
 )
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-    
+
+      <Provider store={store}>
+        <App />
+      </Provider>
   ,
   document.getElementById('root')
 );
@@ -33,3 +35,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+// this is a test of the add trip branch
