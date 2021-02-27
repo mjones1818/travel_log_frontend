@@ -9,6 +9,7 @@ import NavBar from './components/navBar'
 import {logout} from './actions/users'
 import Signup from './components/signup'
 import {login} from './actions/users'
+import CreateTrip from './components/trips/createTrip';
 
 class App extends Component {
   state = {
@@ -44,7 +45,7 @@ class App extends Component {
             )
           }} />
           <Route exact path='/signup' render={()=> <Signup />}/>
-          
+          <Route exact path='/trips/new' render={()=> <CreateTrip/>}/>
         </Router>
         
       </div>
