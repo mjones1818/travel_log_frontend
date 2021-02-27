@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {DirectUpload} from 'activestorage'
 import {connect} from 'react-redux'
 import {login} from '../actions/users'
-import { Redirect } from 'react-router-dom'
+
 class Signup extends Component {
   state = {
     name: '',

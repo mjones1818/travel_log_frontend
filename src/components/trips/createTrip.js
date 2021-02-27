@@ -1,3 +1,4 @@
+import { DirectUpload } from 'activestorage'
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
 
@@ -12,7 +13,7 @@ class CreateTrip extends Component {
   handleOnChange = event => {
     if (event.target.name === 'images') {
       this.setState({
-        [event.target.name]: event.target.files[0]
+        [event.target.name]: [Object.values(event.target.files)]
       })
     } else {
       this.setState({
@@ -20,6 +21,8 @@ class CreateTrip extends Component {
       })
     }
   }
+
+  
 
   handleSubmit = event => {
     event.preventDefault()
@@ -39,10 +42,40 @@ class CreateTrip extends Component {
         'Accept': 'application/json'
     },
     body: JSON.stringify(data)
-  })
-  .then(resp => resp.json())
-  .then(data => console.log(data))
+    })
+    .then(resp => resp.json())
+    .then(resp => this.uploadFiles(this.state.images,resp))
   }
+
+  uploadFiles = (files, user) => {
+    files[0].forEach(file => this.uploadFile(file,user))
+    // for (let i=0; i< files.length; i++) {
+    //   this.uploadFile(files[0][i],user)
+    // }
+  }
+  
+  uploadFile = (file,user) => {
+    
+    const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+    upload.create((error, blob) => {
+      if (error) {
+        console.log(error,'error')
+      } else {
+        console.log('there is no error')
+        fetch(`http://localhost:3000/trips/${user.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({images: blob.signed_id})
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+      }
+    })
+  }
+
   render() {
     return (
       <div>
