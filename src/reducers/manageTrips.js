@@ -2,7 +2,7 @@ export default function manageTrips(state={
   trips: []
 }, action) {
   switch (action.type) {
-    case 'ADD_TRIP':
+    case 'TRIPS':
       return {
         ...state, trips: [...state.trips, action.trip]
       }

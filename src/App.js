@@ -10,6 +10,7 @@ import {logout} from './actions/users'
 import Signup from './components/signup'
 import {login} from './actions/users'
 import CreateTrip from './components/trips/createTrip';
+import TripContainer from './containers/trips'
 
 class App extends Component {
   state = {
@@ -46,6 +47,7 @@ class App extends Component {
           }} />
           <Route exact path='/signup' render={()=> <Signup />}/>
           <Route exact path='/trips/new' render={()=> <CreateTrip/>}/>
+          <Route exact path='/trips' render={()=> <TripContainer/>}/>
         </Router>
         
       </div>
