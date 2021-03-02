@@ -4,6 +4,10 @@ export default function manageTrips(state={
   switch (action.type) {
     case 'TRIPS':
       return {
+        ...state, trips: action.trip
+      }
+    case 'TRIP':
+      return {
         ...state, trips: [...state.trips, action.trip]
       }
     default:

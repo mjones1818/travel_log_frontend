@@ -1,9 +1,9 @@
 import { DirectUpload } from 'activestorage'
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
+import {tripAction, fetchTrips, trip} from '../../actions/trips'
 
 class CreateTrip extends Component {
-
   state = {
     country: '',
     text: '',
@@ -48,20 +48,43 @@ class CreateTrip extends Component {
   }
 
   uploadFiles = (files, user) => {
-    files[0].forEach(file => this.uploadFile(file,user))
-    // for (let i=0; i< files.length; i++) {
-    //   this.uploadFile(files[0][i],user)
-    // }
-  }
-  
-  uploadFile = (file,user) => {
+    let last = false
     
+    const iterate = (file, index, files) => {
+      
+      if (index === files.length-1) {
+        last = true
+      }
+      
+      this.uploadFile(file,user,last)
+    }
+    files[0].forEach(iterate)
+  }
+
+  logBlobs = (file,user) => {
     const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+
     upload.create((error, blob) => {
+      console.log('STARTING',blob)
+      if (!error) {
+        console.log('no error', blob)
+        this.setState({
+          ...this.state,
+          images: [...this.state.images, blob.signed_id]
+        },console.log(this.state))
+      }
+    })
+  }
+
+  uploadFile = (file,user,last) => {
+    const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+    
+    upload.create((error, blob) => {
+      console.log('STARTING',blob)
       if (error) {
         console.log(error,'error')
       } else {
-        console.log('there is no error')
+        console.log('no error')
         fetch(`http://localhost:3000/trips/${user.id}`, {
           method: 'PUT',
           headers: {
@@ -71,7 +94,9 @@ class CreateTrip extends Component {
           body: JSON.stringify({images: blob.signed_id})
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => {
+          last ? this.props.trip(data) : console.log('false')
+        })
       }
     })
   }
@@ -102,4 +127,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(CreateTrip)
+export default connect(mapStateToProps, {tripAction, trip})(CreateTrip)
