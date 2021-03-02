@@ -10,6 +10,11 @@ export default function manageTrips(state={
       return {
         ...state, trips: [...state.trips, action.trip]
       }
+    case 'FETCHING_TRIPS':
+      console.log('FETCHING TRIPS')
+      return {
+        
+      }
     default:
       return state
   }

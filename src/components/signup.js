@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {DirectUpload} from 'activestorage'
 import {connect} from 'react-redux'
 import {login} from '../actions/users'
+const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-79368.herokuapp.com' : 'http://localhost:3000'
 
 class Signup extends Component {
   state = {
@@ -30,7 +31,7 @@ class Signup extends Component {
       password: this.state.password
     }
 
-    fetch('http://localhost:3000/users', {
+    fetch(`${url}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

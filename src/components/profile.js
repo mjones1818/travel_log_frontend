@@ -2,7 +2,7 @@ import {Component} from 'react'
 import {connect} from 'react-redux'
 import TripContainer from '../containers/trips'
 import {tripAction, fetchTrips} from '../actions/trips'
-
+const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-79368.herokuapp.com' : 'http://localhost:3000'
 
 class Profile extends Component {
 
@@ -16,7 +16,7 @@ class Profile extends Component {
     return(
       <div>
         <h1>Profile: {this.props.currentUser.name}</h1>
-        <img src={`http://localhost:3000/${this.props.currentUser.profile_url}`}/>
+        <img src={`${url}/${this.props.currentUser.profile_url}`}/>
 
       </div>
     )

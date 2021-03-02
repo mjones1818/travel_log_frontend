@@ -47,7 +47,9 @@ class App extends Component {
           }} />
           <Route exact path='/signup' render={()=> <Signup />}/>
           <Route exact path='/trips/new' render={()=> <CreateTrip/>}/>
+          
           <Route exact path='/trips' render={()=> <TripContainer/>}/>
+          {/* <Route exact path='/trips/:id' render={()=> <TripContainer/>}/> */}
         </Router>
         
       </div>

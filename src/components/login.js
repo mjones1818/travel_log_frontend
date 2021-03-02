@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {login} from '../actions/users'
-
+const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-79368.herokuapp.com' : 'http://localhost:3000'
 class Login extends Component{
   state = {
     name: '',
@@ -26,7 +26,7 @@ class Login extends Component{
       password: ''
     })
 
-    fetch('http://localhost:3000/login', {
+    fetch(`${url}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

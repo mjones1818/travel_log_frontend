@@ -1,7 +1,7 @@
 import { DirectUpload } from 'activestorage'
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
-import {tripAction, fetchTrips, trip} from '../../actions/trips'
+import {tripAction, fetchTrips, trip, uploadFile} from '../../actions/trips'
 
 class CreateTrip extends Component {
   state = {
@@ -56,50 +56,50 @@ class CreateTrip extends Component {
         last = true
       }
       
-      this.uploadFile(file,user,last)
+      this.props.uploadFile(file,user,last)
     }
     files[0].forEach(iterate)
   }
 
-  logBlobs = (file,user) => {
-    const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+  // logBlobs = (file,user) => {
+  //   const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
 
-    upload.create((error, blob) => {
-      console.log('STARTING',blob)
-      if (!error) {
-        console.log('no error', blob)
-        this.setState({
-          ...this.state,
-          images: [...this.state.images, blob.signed_id]
-        },console.log(this.state))
-      }
-    })
-  }
+  //   upload.create((error, blob) => {
+  //     console.log('STARTING',blob)
+  //     if (!error) {
+  //       console.log('no error', blob)
+  //       this.setState({
+  //         ...this.state,
+  //         images: [...this.state.images, blob.signed_id]
+  //       },console.log(this.state))
+  //     }
+  //   })
+  // }
 
-  uploadFile = (file,user,last) => {
-    const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+  // uploadFile = (file,user,last) => {
+  //   const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
     
-    upload.create((error, blob) => {
-      console.log('STARTING',blob)
-      if (error) {
-        console.log(error,'error')
-      } else {
-        console.log('no error')
-        fetch(`http://localhost:3000/trips/${user.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({images: blob.signed_id})
-        })
-        .then(resp => resp.json())
-        .then(data => {
-          last ? this.props.trip(data) : console.log('false')
-        })
-      }
-    })
-  }
+  //   upload.create((error, blob) => {
+  //     console.log('STARTING',blob)
+  //     if (error) {
+  //       console.log(error,'error')
+  //     } else {
+  //       console.log('no error')
+  //       fetch(`http://localhost:3000/trips/${user.id}`, {
+  //         method: 'PUT',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Accept': 'application/json'
+  //         },
+  //         body: JSON.stringify({images: blob.signed_id})
+  //       })
+  //       .then(resp => resp.json())
+  //       .then(data => {
+  //         last ? this.props.trip(data) : console.log('false')
+  //       })
+  //     }
+  //   })
+  // }
 
   render() {
     return (
@@ -127,4 +127,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {tripAction, trip})(CreateTrip)
+export default connect(mapStateToProps, {tripAction, trip, uploadFile})(CreateTrip)
