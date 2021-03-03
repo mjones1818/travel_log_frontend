@@ -40,7 +40,8 @@ class Signup extends Component {
       body: JSON.stringify(user)
     })
     .then(resp => resp.json())
-    .then(data => this.uploadFile(this.state.profilePic, data))
+    .then(data => this.props.login(data))
+    // .then(data => this.uploadFile(this.state.profilePic, data))
   }
 
   uploadFile = (file, user) => {
@@ -50,7 +51,7 @@ class Signup extends Component {
         console.log(error)
       } else {
         console.log('there is no error')
-        fetch(`http://localhost:3000/users/${user.id}`, {
+        fetch(url + `/users/${user.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
