@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react';
 import './App.css';
 import Login from './components/login'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Profile from './components/profile'
 import {connect} from 'react-redux'
 import NavBar from './components/navBar'
@@ -37,20 +37,20 @@ class App extends Component {
       <div className="App">
         <Router>
           <NavBar currentUser={this.props.currentUser} logout={this.props.logout}/>
-        
-          <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
-          <Route exact path='/profile' render={()=> {
-            return this.props.currentUser ? (
-              <Profile />
-            ) : (
-              <Login setCurrentUser={this.setCurrentUser} />
-            )
-          }} />
-          <Route exact path='/signup' render={()=> <Signup />}/>
-          <Route exact path='/trips/new' render={()=> <CreateTrip/>}/>
-          
-          <Route exact path='/trips' render={(routerProps)=> <TripContainer {...routerProps}/>}/>
-          <Route exact path='/trips/:id' render={(routerProps)=> <TripShow {...routerProps} trip={this.props.trips.filter(trip => trip.id == routerProps.match.params.id)[0]}/>}/>
+          <Switch>
+            <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
+            <Route exact path='/profile' render={()=> {
+              return this.props.currentUser ? (
+                <Profile />
+              ) : (
+                <Login setCurrentUser={this.setCurrentUser} />
+              )
+            }} />
+            <Route exact path='/signup' render={()=> <Signup />}/>
+            <Route exact path='/trips' render={(routerProps)=> <TripContainer {...routerProps}/>}/>
+            <Route path='/trips/new' render={()=> <CreateTrip/>}/>
+            <Route exact path='/trips/:id' render={(routerProps)=> <TripShow {...routerProps} trip={this.props.trips.filter(trip => trip.id == routerProps.match.params.id)[0]}/>}/>
+          </Switch>
         </Router>
         
       </div>
