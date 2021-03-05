@@ -29,7 +29,6 @@ export function uploadFile (file,user,last) {
   return dispatch => {
     dispatch({type: 'FETCHING_TRIPS'})
     const upload = new DirectUpload(file, `http://localhost:3000/rails/active_storage/direct_uploads`)
-
     upload.create((error, blob) => {
       console.log('STARTING',blob)
       if (error) {
@@ -52,5 +51,4 @@ export function uploadFile (file,user,last) {
       }
     })
   }
-  
 }

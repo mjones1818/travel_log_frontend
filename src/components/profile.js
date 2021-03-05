@@ -16,7 +16,7 @@ class Profile extends Component {
     return(
       <div>
         <h1>Profile: {this.props.currentUser.name}</h1>
-        <img src={`${url}/${this.props.currentUser.profile_url}`}/>
+        <img id='profile-pic' src={`${url}/${this.props.currentUser.profile_url}`}/>
 
       </div>
     )

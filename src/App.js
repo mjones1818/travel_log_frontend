@@ -11,6 +11,8 @@ import Signup from './components/signup'
 import {login} from './actions/users'
 import CreateTrip from './components/trips/createTrip';
 import TripContainer from './containers/trips'
+import TripShow from './components/trips/show';
+import trips from './containers/trips';
 
 class App extends Component {
   state = {
@@ -31,7 +33,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this)
     return (
       <div className="App">
         <Router>
@@ -48,8 +49,8 @@ class App extends Component {
           <Route exact path='/signup' render={()=> <Signup />}/>
           <Route exact path='/trips/new' render={()=> <CreateTrip/>}/>
           
-          <Route exact path='/trips' render={()=> <TripContainer/>}/>
-          {/* <Route exact path='/trips/:id' render={()=> <TripContainer/>}/> */}
+          <Route exact path='/trips' render={(routerProps)=> <TripContainer {...routerProps}/>}/>
+          <Route exact path='/trips/:id' render={(routerProps)=> <TripShow {...routerProps} trip={this.props.trips.filter(trip => trip.id == routerProps.match.params.id)[0]}/>}/>
         </Router>
         
       </div>
@@ -59,7 +60,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.users.currentUser
+    currentUser: state.users.currentUser,
+    trips: state.trips.trips
   }
 }
 

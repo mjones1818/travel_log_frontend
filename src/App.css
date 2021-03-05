@@ -37,6 +37,17 @@
   }
 }
 
-img {
+#profile-pic {
+  height: 300px;
+}
+
+.trip-image {
   height: 200px;
+}
+
+.carousel {
+  width: 85%;
+  position: relative;
+  max-width: 960px;
+  margin-left: 12%;
 }

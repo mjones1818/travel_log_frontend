@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Trip from '../components/trips/index'
 import {tripAction, fetchTrips} from '../actions/trips'
 import {Redirect} from 'react-router-dom'
+import TripShow from '../components/trips/show'
 
 class TripContainer extends Component {
   handleClick = event => {
@@ -18,7 +19,7 @@ class TripContainer extends Component {
     return (
       <div className='trip-container'>
         {this.props.trips ? (this.props.trips.map(data => <Trip trip={data} handleClick={this.handleClick}/>)) : 'No trips'}
-
+        {this.props.match.params.id ? <TripShow trip={'test'}/> : ''}
       </div>
     )
   }

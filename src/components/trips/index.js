@@ -7,7 +7,7 @@ const Trip = props => {
     <div className='trip' onClick={props.handleClick}>
       <Link to={`/trips/${props.trip.id}`}>
         <h3>{props.trip.country}</h3>
-        <img src={`${url}/${props.trip.image_urls[0]}`}></img>
+        <img className='trip-image'src={`${url}/${props.trip.image_urls[0]}`}></img>
       </Link>
 
     </div>
