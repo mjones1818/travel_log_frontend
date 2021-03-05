@@ -41,17 +41,18 @@ class Signup extends Component {
     })
     .then(resp => resp.json())
     .then(data => this.props.login(data))
-    // .then(data => this.uploadFile(this.state.profilePic, data))
+    .then(data => this.uploadFile(this.state.profilePic, data))
   }
 
   uploadFile = (file, user) => {
     const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+
     upload.create((error, blob) => {
       if (error) {
         console.log(error)
       } else {
         console.log('there is no error')
-        fetch(url + `/users/${user.id}`, {
+        fetch(url + `/users/${user.user.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

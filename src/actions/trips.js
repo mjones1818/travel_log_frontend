@@ -19,7 +19,7 @@ export const trip = trip => {
 export const fetchTrips = data => {
   return (
     
-    fetch(`${url}/${data.props.currentUser.id}/trips`)
+    fetch(`${url}/users/${data.props.currentUser.id}/trips`)
     .then(resp => resp.json())
     .then(resp => data.props.tripAction(resp))
   )
@@ -28,14 +28,14 @@ export const fetchTrips = data => {
 export function uploadFile (file,user,last) {
   return dispatch => {
     dispatch({type: 'FETCHING_TRIPS'})
-    const upload = new DirectUpload(file, `${url}/rails/active_storage/direct_uploads`)
-  
+    const upload = new DirectUpload(file, `http://localhost:3000/rails/active_storage/direct_uploads`)
+
     upload.create((error, blob) => {
       console.log('STARTING',blob)
       if (error) {
         console.log(error,'error')
       } else {
-        console.log('no error')
+        console.log('no error', blob)
         fetch(`${url}/trips/${user.id}`, {
           method: 'PUT',
           headers: {
@@ -46,7 +46,8 @@ export function uploadFile (file,user,last) {
         })
         .then(resp => resp.json())
         .then(data => {
-          last ? dispatch({type: 'TRIP'}, data) : console.log('false')
+          console.log("DATA", data)
+          last ? dispatch({type: 'TRIP', payload: data}) : console.log('false', data)
         })
       }
     })

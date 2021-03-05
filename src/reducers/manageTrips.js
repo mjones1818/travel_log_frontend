@@ -7,13 +7,14 @@ export default function manageTrips(state={
         ...state, trips: action.trip
       }
     case 'TRIP':
+
       return {
-        ...state, trips: [...state.trips, action.trip]
+        ...state, trips: [...state.trips, action.payload]
       }
     case 'FETCHING_TRIPS':
       console.log('FETCHING TRIPS')
       return {
-        
+        ...state
       }
     default:
       return state
