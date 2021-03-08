@@ -5,7 +5,7 @@ import Login from './components/login'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Profile from './components/profile'
 import {connect} from 'react-redux'
-import NavBar from './components/navBar'
+import NavigationBar from './components/reactNavBar'
 import {logout} from './actions/users'
 import Signup from './components/signup'
 import {login} from './actions/users'
@@ -28,15 +28,12 @@ class App extends Component {
     })
   }
 
-  logout = () => {
-    
-  }
 
   render() {
     return (
       <div className="App">
         <Router>
-          <NavBar currentUser={this.props.currentUser} logout={this.props.logout}/>
+          <NavigationBar currentUser={this.props.currentUser} logout={this.props.logout}/>
           <Switch>
             <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
             <Route exact path='/profile' render={()=> {
@@ -65,7 +62,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = dispatch => {
+// const patchToProps = dispatch => {
 //   return {
 //     logout: (user) => {
 //       dispatch(logout(user))

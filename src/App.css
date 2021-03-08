@@ -50,3 +50,17 @@
   position: relative;
   margin: auto;
 }
+
+.trip-container {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.card {
+  min-width: 18rem !important;
+  max-width: 18rem !important;
+}
+
+#logout-button {
+  text-align: right !important;
+}

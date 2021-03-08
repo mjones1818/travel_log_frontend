@@ -2,14 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Trip from '../components/trips/index'
 import {tripAction, fetchTrips} from '../actions/trips'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link, useHistory} from 'react-router-dom'
 import TripShow from '../components/trips/show'
-import {CardDeck} from 'react-bootstrap'
+// import {CardDeck} from 'react-bootstrap'
+import CardDeck from 'react-bootstrap/CardDeck'
 
 class TripContainer extends Component {
+  
+
   handleClick = event => {
     console.log(event.target);
-    <Redirect to='/profile'/>
   }
 
   componentDidUpdate() {

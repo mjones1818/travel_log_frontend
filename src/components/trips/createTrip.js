@@ -2,6 +2,8 @@ import { DirectUpload } from 'activestorage'
 import React, { Component} from 'react'
 import {connect} from 'react-redux'
 import {tripAction, fetchTrips, trip, uploadFile} from '../../actions/trips'
+import Form from 'react-bootstrap/Form'
+import {Button} from 'react-bootstrap'
 
 class CreateTrip extends Component {
   state = {
@@ -104,7 +106,7 @@ class CreateTrip extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <label>Country:</label>
           <input type='text' name='country' value={this.state.country} onChange={this.handleOnChange}></input>
           <br></br>
@@ -114,8 +116,26 @@ class CreateTrip extends Component {
           <label>Upload your pics</label>
           <input type='file' name='images' multiple onChange={this.handleOnChange}></input>
           <br></br>
-          <input type='submit' value='Create my account'></input>
-        </form>
+          <input type='submit' value='Upload Trip'></input>
+        </form> */}
+
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Country</Form.Label>
+            <Form.Control type="text" placeholder="Enter Country name" value={this.state.country} onChange={this.handleOnChange}/>
+          </Form.Group>
+
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" rows={3} />
+          </Form.Group>
+          <Form.Group>
+            <Form.File id="exampleFormControlFile1" label="Upload Photos" multiple/>
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
       </div>
     )
   }
