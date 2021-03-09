@@ -15,6 +15,7 @@ class TripContainer extends Component {
   }
 
   componentDidMount() {
+    
     fetchTrips(this)
   }
   
@@ -23,7 +24,7 @@ class TripContainer extends Component {
     return (
       <div className='trip-container'>
         <CardDeck>
-          {this.props.trips ? (this.props.trips.map(data => <Trip trip={data} handleClick={this.handleClick}/>)) : 'No trips'}
+          {this.props.trips ? (this.props.trips.map(data => <Trip trip={data} handleClick={this.handleClick} key={data.image_urls[0]}/>)) : 'No trips'}
         </CardDeck> 
       </div>
     )

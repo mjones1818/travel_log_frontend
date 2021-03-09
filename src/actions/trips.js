@@ -17,6 +17,9 @@ export const trip = trip => {
 
 
 export const fetchTrips = data => {
+  if (!data.props.currentUser) {
+    return
+  }
   return (
     
     fetch(`${url}/users/${data.props.currentUser.id}/trips`)

@@ -35,6 +35,7 @@ class App extends Component {
         <Router>
           <NavigationBar currentUser={this.props.currentUser} logout={this.props.logout}/>
           <Switch>
+            <Route exact path='/' render={(routerProps)=> <TripContainer {...routerProps}/>}/>
             <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
             <Route exact path='/profile' render={()=> {
               return this.props.currentUser ? (
