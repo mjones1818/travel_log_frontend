@@ -14,7 +14,7 @@ class TripContainer extends Component {
     console.log(event.target);
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     fetchTrips(this)
   }
   

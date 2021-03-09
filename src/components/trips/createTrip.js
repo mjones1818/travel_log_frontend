@@ -13,6 +13,7 @@ class CreateTrip extends Component {
   }
 
   handleOnChange = event => {
+    console.log(event.target.value)
     if (event.target.name === 'images') {
       this.setState({
         [event.target.name]: [Object.values(event.target.files)]
@@ -31,7 +32,7 @@ class CreateTrip extends Component {
     let data = {
       trip: {
         country: this.state.country,
-        text: this.state.country
+        text: this.state.text
       },
       user: this.props.currentUser
     
@@ -122,15 +123,15 @@ class CreateTrip extends Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Country</Form.Label>
-            <Form.Control type="text" placeholder="Enter Country name" value={this.state.country} onChange={this.handleOnChange}/>
+            <Form.Control type="text" name='country' placeholder="Enter Country name" value={this.state.country} onChange={this.handleOnChange}/>
           </Form.Group>
 
           <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" rows={3} />
+            <Form.Control as="textarea" rows={3} name='text' value={this.state.text} onChange={this.handleOnChange}/>
           </Form.Group>
           <Form.Group>
-            <Form.File id="exampleFormControlFile1" label="Upload Photos" multiple/>
+            <Form.File name='images' id="exampleFormControlFile1" label="Upload Photos" multiple onChange={this.handleOnChange}/>
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit

@@ -7,6 +7,7 @@ const makeCarouselItems = props => {
       return (
         <Carousel.Item>
           <img
+            key={image}
             className="d-block w-100"
             src={`http://localhost:3000/${image}`}
             alt="A picture slide"

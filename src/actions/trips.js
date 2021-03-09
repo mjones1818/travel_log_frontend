@@ -46,7 +46,8 @@ export function uploadFile (file,user,last) {
         .then(resp => resp.json())
         .then(data => {
           console.log("DATA", data)
-          last ? dispatch({type: 'TRIP', payload: data}) : console.log('false', data)
+          dispatch({type: 'TRIP', payload: data})
+          // last ? dispatch({type: 'TRIP', payload: data}) : console.log('false', data)
         })
       }
     })

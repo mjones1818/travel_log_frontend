@@ -7,10 +7,12 @@ export default function manageTrips(state={
         ...state, trips: action.trip
       }
     case 'TRIP':
-
+      console.log('This is the TRIP reducer', action)
+      // debugger
       return {
         ...state, trips: [...state.trips, action.payload]
       }
+
     case 'FETCHING_TRIPS':
       return {
         ...state
