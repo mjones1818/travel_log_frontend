@@ -16,16 +16,48 @@ export const trip = trip => {
 
 
 
-export const fetchTrips = data => {
-  if (!data.props.currentUser) {
-    return
-  }
-  return (
+// export const fetchTrips = data => {
+//   // debugger
+//   if (data.id) {
+//     debugger
+//     return (
+//       fetch(`${url}/users/${data.id}/trips`)
+//       .then(resp => resp.json())
+//       .then(resp => data.props.tripAction(resp))
+//     )
+//   }
+//   return (
     
-    fetch(`${url}/users/${data.props.currentUser.id}/trips`)
-    .then(resp => resp.json())
-    .then(resp => data.props.tripAction(resp))
-  )
+//     fetch(`${url}/users/${data.props.currentUser.id}/trips`)
+//     .then(resp => resp.json())
+//     .then(resp => data.props.tripAction(resp))
+//   )
+// }
+
+export function fetchTrips (data) {
+  // debugger
+  // if (data.props.currentUser === null) {
+  //   return
+  // }
+  if (data.id) {
+    return dispatch => {
+      fetch(`${url}/users/${data.id}/trips`)
+      .then(resp => resp.json())
+      .then(resp => dispatch({type: 'TRIPS', payload: resp}))
+    }
+  } 
+
+  if (data.props.currentUser) {
+    return dispatch => {
+      fetch(`${url}/users/${data.props.currentUser.id}/trips`)
+      .then(resp => resp.json())
+      .then(resp => dispatch({type: 'TRIPS', payload: resp}))
+    }
+  } else {
+    return dispatch => {
+      
+    }
+  }
 }
 
 export function uploadFile (file,user,last) {

@@ -16,7 +16,7 @@ class TripContainer extends Component {
 
   componentDidMount() {
     
-    fetchTrips(this)
+    this.props.fetchTrips(this)
   }
   
   render() {
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
     currentUser: state.users.currentUser
   }
 }
-export default connect(mapStateToProps,{tripAction})(TripContainer)
+export default connect(mapStateToProps,{tripAction, fetchTrips})(TripContainer)

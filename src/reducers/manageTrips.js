@@ -3,8 +3,9 @@ export default function manageTrips(state={
 }, action) {
   switch (action.type) {
     case 'TRIPS':
+      console.log('This is the TRIPS reducer', action)
       return {
-        ...state, trips: action.trip
+        ...state, trips: action.payload
       }
     case 'TRIP':
       console.log('This is the TRIP reducer', action)

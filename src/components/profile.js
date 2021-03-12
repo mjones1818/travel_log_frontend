@@ -7,18 +7,20 @@ const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-793
 class Profile extends Component {
 
   componentDidMount(){
-    // fetch(`http://localhost:3000/users/${this.props.currentUser.id}/trips`)
-    // .then(resp => resp.json())
-    // .then(data => this.props.trips(data))
-    fetchTrips(this)
+    this.props.fetchTrips(this)
   }
   render() {
     return(
-      <div>
+      <>
+      <div className='profile'>
         <h1>Profile: {this.props.currentUser.name}</h1>
         <img id='profile-pic' src={`${url}/${this.props.currentUser.profile_url}`}/>
-
+        <br></br>
+        
       </div>
+      <h4>My trips: </h4>
+      <TripContainer/>
+      </>
     )
   }
 }
@@ -29,4 +31,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {tripAction})(Profile)
+export default connect(mapStateToProps, {tripAction, fetchTrips})(Profile)
