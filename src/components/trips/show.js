@@ -27,6 +27,7 @@ const TripShow = props => {
           {makeCarouselItems(props)}
         </Carousel>
       </div>
+      <h4>Description: </h4>
       <p>{props.trip.text}</p>
     </div>
   )

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {login} from '../actions/users'
+// import {connect} from 'react-redux'
+// import {login} from '../actions/users'
 const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-79368.herokuapp.com' : 'http://localhost:3000'
 class Login extends Component{
   state = {
@@ -42,6 +42,7 @@ class Login extends Component{
   render() {
     return (
       <div>
+        {/* <form onSubmit={this.props.fetchUser}> */}
         <form onSubmit={this.handleSubmit}>
           <label>Name:</label>
           <input type='text' name='name' value={this.state.name} onChange={this.handleChange}/>
@@ -55,4 +56,4 @@ class Login extends Component{
   }
 }
 
-export default connect(null, {login})(Login)
+export default Login

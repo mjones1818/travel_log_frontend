@@ -22,13 +22,13 @@ class App extends Component {
     currentProfile: null
   }
 
-  setCurrentUser = data => {
-    console.log(data)
-    this.setState({
-      currentUser: data.user,
-      currentProfile: data.profile
-    })
-  }
+  // setCurrentUser = data => {
+
+  //   this.setState({
+  //     currentUser: data.user,
+  //     currentProfile: data.profile
+  //   })
+  // }
 
 
   render() {
@@ -39,7 +39,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/users/:id' render={(routerProps)=> <UserShow {...routerProps} user={this.props.users.filter(user => user.id == routerProps.match.params.id)[0]}/>}/>
             <Route exact path='/' render={(routerProps)=> <UserContainer {...routerProps}/>}/>
-            <Route exact path='/login' render={()=> <Login setCurrentUser={this.setCurrentUser}/>}/>
+            <Route exact path='/login' render={()=> <Login login={this.props.login} fetchUser={this.props.fetchUser}/>}/>
             <Route exact path='/profile' render={()=> {
               return this.props.currentUser ? (
                 <Profile />
@@ -48,7 +48,7 @@ class App extends Component {
               )
             }} />
             <Route exact path='/signup' render={()=> <Signup />}/>
-            <Route exact path='/trips' render={(routerProps)=> <TripContainer {...routerProps}/>}/>
+            <Route exact path='/trips' render={(routerProps)=><><h1>My Trips</h1> <TripContainer {...routerProps}/></>}/>
             <Route path='/trips/new' render={()=> <CreateTrip/>}/>
             <Route exact path='/trips/:id' render={(routerProps)=> <TripShow {...routerProps} trip={this.props.trips.filter(trip => trip.id == routerProps.match.params.id)[0]}/>}/>
           </Switch>

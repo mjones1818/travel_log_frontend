@@ -19,5 +19,12 @@ export function fetchUsers(data) {
     .then(resp => resp.json())
     .then(resp => dispatch({type: 'USERS', payload: resp}))
   }
-
 }
+
+// export function fetchUser(data) {
+//   data.preventDefault()
+//   debugger
+//   return dispatch => {
+    
+//   }
+// }

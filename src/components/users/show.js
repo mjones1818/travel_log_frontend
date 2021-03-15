@@ -10,9 +10,7 @@ const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-793
 class UserShow extends Component {
 
   componentDidMount(){
-    // fetch(`http://localhost:3000/users/${this.props.currentUser.id}/trips`)
-    // .then(resp => resp.json())
-    // .then(data => this.props.trips(data))
+
     this.props.fetchTrips(this.props.user)
   }
   render() {
@@ -25,9 +23,7 @@ class UserShow extends Component {
         
       </div>
       <TripContainer/>
-      <CardDeck>
-        {/* <Trip /> */}
-      </CardDeck>
+
       </>
     )
   }

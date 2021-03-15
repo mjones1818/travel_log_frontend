@@ -6,7 +6,6 @@ const url = process.env.NODE_ENV === 'production' ? 'https://radiant-retreat-793
 
 
 const Trip = props => {
-
   return (
     
     <Card className= 'card' onClick={props.handleClick}>
@@ -14,9 +13,9 @@ const Trip = props => {
       <Card.Body>
         <Card.Title>{props.trip.country}</Card.Title>
         <Card.Text>
-          {props.trip.text}
+          {props.trip.text.split(' ').slice(0,20).join(' ')}
         </Card.Text>
-        <Link to={`trips/${props.trip.id}`}><Button variant="primary">View Trip</Button></Link>
+        <Link to={`/trips/${props.trip.id}`}><Button variant="primary">View Trip</Button></Link>
       </Card.Body>
       <Card.Footer>
         <small className="text-muted"></small>
